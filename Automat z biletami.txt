@@ -1,0 +1,129 @@
+package automat;
+
+import java.util.Scanner;
+
+public class Automat {
+
+    public static void main(String[] args) {
+        Scanner skaner = new Scanner (System.in);
+        int x, a;
+        System.out.println("Witamy w menu zakupu biletów");
+        do {
+            System.out.println("Wybierz opcjê, która ciê interesuje:");
+            System.out.println("1. Bilet jednorazowy");
+            System.out.println("2. Bilet 8-godzinny");
+            System.out.println("3. Bilet miesiêczny");
+            System.out.println("4. Bilet roczny");
+            System.out.println("5. Zapoznaj siê z regulaminem korzystania z automatu");
+            System.out.println("6. Wyjœcie");
+            x=skaner.nextInt();
+            switch (x){
+                    case (1):
+                        System.out.println("Czy na pewno chcesz zakupiæ ten bilet?");
+                        System.out.println("1. Tak");
+                        System.out.println("2. Nie");
+                        a=skaner.nextInt();
+                        if (a==1) {
+                            System.out.println("Bilet zostanie za chwile wydrukowany");
+                            break;
+                        }
+                        else if (a==2){
+                        System.out.println("Bilet nie zostanie wydrukowany");
+                        break;
+                    }
+                        else {
+                            System.out.println("Nie ma takiej opcji");
+                            break;
+                        }
+                    case (2):
+                        System.out.println("Czy na pewno chcesz zakupiæ ten bilet?");
+                        System.out.println("1. Tak");
+                        System.out.println("2. Nie");
+                        a=skaner.nextInt();
+                        if (a==1) {
+                            System.out.println("Bilet zostanie za chwile wydrukowany");
+                            break;
+                        }
+                        else if (a==2){
+                        System.out.println("Bilet nie zostanie wydrukowany");
+                        break;
+                    }
+                        else {
+                            System.out.println("Nie ma takiej opcji");
+                            break;
+                        }
+                    case (3):
+                        System.out.println("Czy na pewno chcesz zakupiæ ten bilet?");
+                        System.out.println("1. Tak");
+                        System.out.println("2. Nie");
+                        a=skaner.nextInt();
+                        if (a==1) {
+                            System.out.println("Wciœnij 1 jeœli posiadasz legitymacjê studenck¹");
+                            System.out.println("Jeœli jej nie posiadasz wciœnij dowolny inny klawisz");
+                            a=skaner.nextInt();
+                            if (a==1) {
+                            System.out.println("Bilet ze zni¿k¹ zostanie za chwile wydrukowany");
+                            break;
+                            }
+                            else {
+                                System.out.println("Bilet zostanie wydrukowany bez zni¿ki");
+                                break;
+                            }
+                        }
+                        else if (a==2){
+                        System.out.println("Bilet nie zostanie wydrukowany");
+                        break;
+                    }
+                        else {
+                            System.out.println("Nie ma takiej opcji");
+                            break;
+                        }
+                    case (4):
+                        System.out.println("Czy na pewno chcesz zakupiæ ten bilet?");
+                        System.out.println("1. Tak");
+                        System.out.println("2. Nie");
+                        a=skaner.nextInt();
+                        if (a==1) {
+                            System.out.println("Wciœnij 1 jeœli posiadasz legitymacjê studenck¹");
+                            System.out.println("Jeœli jej nie posiadasz wciœnij dowolny inny klawisz");
+                            a=skaner.nextInt();
+                            if (a==1) {
+                            System.out.println("Bilet ze zni¿k¹ zostanie za chwile wydrukowany");
+                            break;
+                            }
+                            else {
+                                System.out.println("Bilet zostanie wydrukowany bez zni¿ki");
+                                break;
+                            }
+                        }
+                        else if (a==2){
+                        System.out.println("Bilet nie zostanie wydrukowany");
+                        break;
+                    }
+                        else {
+                            System.out.println("Nie ma takiej opcji");
+                            break;
+                        }
+                    case (5):
+                        System.out.println("Regulamin korzystania z automatu:");
+                        System.out.println("1. W menu wybieraj¹ Pañstwo bilet, który po chwili zostaje wydrukowany przez maszynê");
+                        System.out.println("2. Pos³uguj¹ siê Pañstwo w interfejsie jedynie cyframi i liczbami");
+                        System.out.println("3. Zap³aciæ za bilet nale¿y podczas kontroli biletów, która nastêpuje podczas podró¿y");
+                        System.out.println("4. Zni¿ki przys³uguj¹ tylko w przypadku biletów miesiêcznych i rocznych dla studentów z legitymacj¹");
+                        System.out.println("Wciœnij dowolny klawisz aby kontynuowaæ");
+                        a=skaner.nextInt();
+                        break;
+                    case (6):
+                        System.out.println("Dziêkujemy za skorzystanie z naszego automatu");
+                        break;
+                    default:
+                        System.out.println("Prosze wybraæ poprawn¹ opcjê");
+                        break;
+                        
+            }            
+        }
+        while (x!=6);
+        System.out.println("Mi³ej podró¿y!");
+    }
+    
+}
