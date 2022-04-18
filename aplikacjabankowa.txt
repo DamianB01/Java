@@ -1,0 +1,213 @@
+﻿package bank;
+
+import java.util.Scanner;
+import java.util.Date;
+import java.util.ArrayList;
+
+
+public class Bank {
+
+    
+    public static void main(String[] args) { 
+        Scanner skaner = new Scanner (System.in);
+        int wybor;
+        System.out.println("Podaj swoją nazwę:");        // nazwa: Jan Kowalski
+        String nazwa= skaner.nextLine();
+        System.out.println("Podaj haslo:");                   // hasło: 123
+        String haslo=skaner.nextLine();
+        if (nazwa.equals("Jan Kowalski")&&haslo.equals("123")){    // logowanie do konta 
+        System.out.println("Logowanie udane");
+        Konto konto = new Konto();
+        Date nowDate = new Date();   // obecna data
+        System.out.println("Aktualna data: "+ nowDate);
+        konto.wyswietlPodsumowanie();
+        do {
+        System.out.println("Menu");  // menu aplikacji
+        System.out.println("1. Wpłata");
+        System.out.println("2. Wypłata");
+        System.out.println("3. Pożyczka - RRSO 8% na 12 miesięcy");
+        System.out.println("4. Lokata");
+        System.out.println("5. Zmiana hasła");
+        System.out.println("6. Wyjście z aplikacji");
+        wybor = skaner.nextInt();
+        switch (wybor){       // funkcje programu
+            case(1): 
+                konto.wplac(0);
+                konto.wyswietlPodsumowanie();
+                break;
+            case(2):
+                konto.wyplac(0);
+                konto.wyswietlPodsumowanie();
+                break;
+            case(3):
+                konto.pozyczka(0);
+                konto.wyswietlPodsumowanie();
+                break;
+            case(4):
+                konto.lokata();
+                konto.wyswietlPodsumowanie();
+                break;
+            case(5):
+                Scanner skanerr = new Scanner (System.in);   // zmiana hasła (nie dało się jej zrobić w programowaniu obiektowym, ponieważ konpilator nie widział tam zmiennej 'haslo')
+                ArrayList <String> zmiana = new ArrayList <String>();
+                zmiana.add(haslo);
+                System.out.println("Twoje obecne hasło to: "+zmiana);
+                System.out.println("Wprowadź nowe hasło: ");
+                String nowe = skanerr.nextLine();
+                haslo=nowe;
+                zmiana.set(0, nowe);
+                System.out.println("Twoje nowe hasło to: "+nowe);
+                System.out.println("Nowego hasła będzie można używac po jego weryfikacji, która nastąpi w ciągu najbliższych 15 minut");
+                break;
+                
+            default:
+                System.out.println("Wybierz poprawną opcję");
+                break;
+        }    
+        
+    }
+        while (wybor!=6);
+        System.out.println("Dziękujemy za korzystanie z naszej aplikacji!");
+        
+        
+    }
+        else {
+            System.out.println("Logowanie nieudane");
+        }
+    }
+    
+    
+}
+class Konto {
+    int numerKonta = 123456789;
+    String typKonta = "ROR";
+    String wlasciciel = "Jan Kowalski";
+    double saldo;
+    
+    void wyswietlPodsumowanie(){
+        System.out.println("Konto o numerze "+numerKonta);
+        System.out.println("Typ konta: "+typKonta);
+        System.out.println("Własność: "+wlasciciel);
+        System.out.println("Saldo: "+saldo);
+    }
+    
+    double wplac(double kwota) {
+        
+        Scanner skanuj = new Scanner(System.in);
+        System.out.println("Podaj kwote wpłaty w pełnych złotych:");
+        try {                   // funkcja try catch w przypadku gdy użyje się kropki zamiast przecinka
+        kwota = skanuj.nextDouble();
+        saldo = saldo + kwota;
+        } 
+        catch (RuntimeException e) {
+            System.out.println("Wpłata się nie udała");
+            System.out.println("Wystąpił błąd! Prosze się upewnić czy podana kwota została wpisana poprawnie");
+            e.printStackTrace();
+        }
+            return saldo;
+    }
+    
+    double wyplac(double kwota){
+        Scanner skanuj = new Scanner(System.in);
+        System.out.println("Do dyspozycji masz "+saldo);
+        System.out.println("Podaj kwote wypłat w pełnych złotych:");
+        try {
+            kwota = skanuj.nextDouble();
+        if (saldo>=kwota){   // gdy kwota wyplaty jest wieksza od posiadanego salda, to program informuje o tym
+        saldo = saldo - kwota;
+        System.out.println("Dokonano wypłaty w wysokości "+kwota+" zł");
+        return saldo;
+        }
+     else {
+        System.out.println("Niewystarczajca ilość środków na koncie");
+        return saldo;  
+        }
+      }
+        catch (RuntimeException e) {
+            System.out.println("Wypłata się nie udała");
+            System.out.println("Wystąpił błąd! Prosze się upewnić czy podana kwota została wpisana poprawnie");
+            e.printStackTrace();
+        }
+        return saldo;
+    }
+    
+    double pozyczka(double kwota) {   // mozliwosc wziecia pozyczki 
+        Scanner skanuj = new Scanner(System.in);
+        System.out.println("Wybierz kwotę pożyczki na 12 miesięcy:");
+        try {
+        kwota = skanuj.nextDouble();
+        String [] miesiace = {"12 miesięcy"};
+        double pozyczka = kwota;
+        double procent = 0.08;
+        saldo = saldo + (int) pozyczka;
+        for (String miesiace1 : miesiace) {
+            double splata = pozyczka*procent;
+            pozyczka = pozyczka+splata;
+            System.out.println("Spłata pożyczki za " + miesiace1 + " wynosi " + pozyczka + "zł");
+        }
+        return saldo;  
+        }
+        catch (RuntimeException e) {
+            System.out.println("Nie udało się wziąć pożyczki");
+            System.out.println("Wystąpił błąd! Prosze się upewnić czy podana kwota została wpisana poprawnie");
+            e.printStackTrace();
+        }
+        return saldo;
+}
+    
+    double lokata() {  // mozliwosc wziecia lokaty 
+    
+String [] miesiące = {"styczeń","luty","marzec","kwiecień","maj","czerwiec","lipiec","sierpień","wrzesień","październik","listopad","grudzień"};
+       Scanner skanuj = new Scanner(System.in);
+       double lokata;
+       double zysk;
+       System.out.println("Ile pieniędzy chcesz wpłacić na lokatę?");
+       try{
+       lokata = skanuj.nextDouble(); 
+       double lokata2 = lokata;
+       if (lokata<=saldo){  
+        for(int h = 0 ; h < miesiące.length ; h++ ) {
+            zysk = lokata*0.006;
+            zysk=zysk*100;
+            zysk=Math.round(zysk);
+            zysk=zysk/100;
+            lokata = lokata*1.006;
+            lokata=lokata*100;
+            lokata=Math.round(lokata);
+            lokata=lokata/100;
+            System.out.println("W miesiącu " + miesiące[h] + " zysk z lokaty wyniósłby " + zysk + "zł, a wysokość lokaty wyniosłaby " + lokata + "zł");
+        
+    }
+        Scanner skaner = new Scanner (System.in);
+        int wybor;
+           System.out.println("Czy na pewno chcesz założyć taka lokatę?");
+           System.out.println("1. Tak");
+           System.out.println("2. Nie");
+        wybor = skaner.nextInt();
+        switch (wybor){
+            case(1):
+                System.out.println("Lokata została załozona");
+                saldo = saldo - lokata2;
+                break;
+            case(2):
+                System.out.println("Lokata nie została założona");
+                break;
+            default:
+                break;
+        }
+        return saldo;
+       }
+       else {
+           System.out.println("Masz za mało środków na koncie");   
+       }
+       return saldo;
+       }
+       catch (RuntimeException e) {
+            System.out.println("Nie udało się założyć lokaty");
+            System.out.println("Wystąpił błąd! Prosze się upewnić czy podana kwota została wpisana poprawnie");
+            e.printStackTrace();
+        }
+        return saldo;
+    }
+    
+}    
